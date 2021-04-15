@@ -6,7 +6,7 @@ import {
   ControlLabel,
   Button,
 } from "react-bootstrap";
-
+import { API_KEY } from "../secrets";
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +17,12 @@ class Search extends Component {
 
   search() {
     console.log("Movie: ", this.state.query);
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=true&query=${this.state.query}`;
+    fetch(url, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((result) => console.log(result));
   }
 
   render() {
